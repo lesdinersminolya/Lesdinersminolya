@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Cercle des Fondatrices — Maison Minolya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230D0D0D'/><circle cx='50' cy='50' r='38' stroke='%23D4AF37' stroke-width='2' fill='none'/><text x='50' y='66' text-anchor='middle' font-family='Cinzel,serif' font-size='42' fill='%23D4AF37'>M</text></svg>">
+<style>
+  :root {
+    --noir: #080806;
+    --noir-profond: #050504;
+    --noir-card: #121211;
+    --or: #D4AF37;
+    --or-clair: #E5C76A;
+    --or-fonce: #A0832A;
+    --ivoire: #F0E6D2;
+    --texte: #D4CDB8;
+    --whisper: #8A7D5E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--noir-profond);
+    color: var(--texte);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(8,8,6,0.92);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--or);
+    letter-spacing: 0.2em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    display: block;
+    font-size: 9px;
+    color: var(--whisper);
+    letter-spacing: 0.3em;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  .nav-back {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: var(--whisper);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-back:hover { color: var(--or); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,175,55,0.1), transparent 70%),
+      radial-gradient(ellipse at bottom, rgba(212,175,55,0.05), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Grand numéro décoratif */
+  .hero-bg-number {
+    position: absolute;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(200px, 35vw, 400px);
+    font-weight: 600;
+    color: rgba(212,175,55,0.04);
+    line-height: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ivoire);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--or);
+    display: block;
+  }
+
+  .hero-intro {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--whisper);
+    line-height: 1.8;
+    max-width: 580px;
+    margin: 0 auto 56px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  /* COMPTEUR */
+  .counter-block {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    border: 1px solid rgba(212,175,55,0.3);
+    padding: 24px 40px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+    position: relative;
+  }
+
+  .counter-block::before, .counter-block::after {
+    content: '✦';
+    position: absolute;
+    font-size: 8px;
+    color: var(--or);
+  }
+
+  .counter-block::before { top: -5px; left: -5px; }
+  .counter-block::after { bottom: -5px; right: -5px; }
+
+  .counter-number {
+    font-family: 'Cinzel', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--or);
+    line-height: 1;
+  }
+
+  .counter-divider {
+    width: 1px;
+    height: 48px;
+    background: rgba(212,175,55,0.3);
+  }
+
+  .counter-label {
+    text-align: left;
+  }
+
+  .counter-label strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ivoire);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .counter-label span {
+    font-size: 11px;
+    color: var(--whisper);
+    letter-spacing: 0.1em;
+  }
+
+  .hero-price {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--or);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .hero-price span {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--noir);
+    background: var(--or);
+    padding: 22px 56px;
+    text-decoration: none;
+    transition: all 0.4s;
+    opacity: 0;
+    animation: fadeUp 1s ease 1s forwards;
+    position: relative;
+  }
+
+  .btn-cta::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 1px solid rgba(212,175,55,0.4);
+    transition: all 0.3s;
+  }
+
+  .btn-cta:hover {
+    background: var(--or-clair);
+    box-shadow: 0 16px 48px rgba(212,175,55,0.3);
+    letter-spacing: 0.4em;
+  }
+
+  .btn-cta:hover::after { inset: -8px; opacity: 0; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ORNEMENT */
+  .ornement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 80px auto;
+    max-width: 400px;
+  }
+
+  .ornement-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--or-fonce));
+  }
+
+  .ornement-line.right {
+    background: linear-gradient(to left, transparent, var(--or-fonce));
+  }
+
+  .ornement-diamond {
+    width: 6px; height: 6px;
+    background: var(--or);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* LETTRE */
+  .lettre-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  .lettre-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .lettre-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 300;
+    color: var(--ivoire);
+    text-align: center;
+    margin-bottom: 56px;
+    line-height: 1.2;
+  }
+
+  .lettre-title em { font-style: italic; color: var(--or); }
+
+  .lettre-body {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--texte);
+  }
+
+  .lettre-body p { margin-bottom: 28px; }
+
+  .lettre-body em { font-style: italic; color: var(--ivoire); }
+
+  .lettre-signature {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--or);
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(212,175,55,0.15);
+  }
+
+  /* AVANTAGES */
+  .avantages-section {
+    padding: 80px 48px;
+    background: rgba(18,18,17,0.5);
+    border-top: 1px solid rgba(212,175,55,0.1);
+    border-bottom: 1px solid rgba(212,175,55,0.1);
+  }
+
+  .avantages-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--or);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 300;
+    color: var(--ivoire);
+    text-align: center;
+    margin-bottom: 64px;
+    line-height: 1.2;
+  }
+
+  .section-heading em { font-style: italic; color: var(--or); }
+
+  .avantages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .avantage-item {
+    padding: 40px 32px;
+    background: rgba(8,8,6,0.6);
+    border: 1px solid rgba(212,175,55,0.08);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .avantage-item:hover {
+    border-color: rgba(212,175,55,0.25);
+    background: rgba(12,12,10,0.8);
+  }
+
+  .avantage-number {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--or-fonce);
+    margin-bottom: 20px;
+  }
+
+  .avantage-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ivoire);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .avantage-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--whisper);
+  }
+
+  /* RÈGLE DES 3 */
+  .regle-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 48px;
+    text-align: center;
+  }
+
+  .regle-block {
+    border: 1px solid rgba(212,175,55,0.2);
+    padding: 48px;
+    position: relative;
+  }
+
+  .regle-block::before {
+    content: '✦';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--noir-profond);
+    padding: 0 16px;
+    color: var(--or);
+    font-size: 14px;
+  }
+
+  .regle-number {
+    font-family: 'Cinzel', serif;
+    font-size: 72px;
+    font-weight: 600;
+    color: var(--or);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .regle-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--ivoire);
+    margin-bottom: 20px;
+  }
+
+  .regle-desc {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--whisper);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* PRIX */
+  .prix-section {
+    padding: 80px 48px;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(212,175,55,0.05), transparent);
+    border-top: 1px solid rgba(212,175,55,0.1);
+  }
+
+  .prix-inner { max-width: 560px; margin: 0 auto; }
+
+  .prix-montant {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(64px, 10vw, 96px);
+    font-weight: 600;
+    color: var(--or);
+    line-height: 1;
+    margin: 24px 0 8px;
+  }
+
+  .prix-detail {
+    font-size: 12px;
+    color: var(--whisper);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .prix-includes {
+    list-style: none;
+    margin-bottom: 48px;
+    text-align: left;
+    display: inline-block;
+  }
+
+  .prix-includes li {
+    font-size: 13px;
+    color: var(--texte);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(212,175,55,0.08);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .prix-includes li::before {
+    content: '✦';
+    color: var(--or);
+    font-size: 8px;
+    flex-shrink: 0;
+  }
+
+  .btn-cta-bottom {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--noir);
+    background: var(--or);
+    padding: 22px 56px;
+    text-decoration: none;
+    transition: all 0.4s;
+  }
+
+  .btn-cta-bottom:hover {
+    background: var(--or-clair);
+    box-shadow: 0 16px 48px rgba(212,175,55,0.3);
+  }
+
+  .places-restantes {
+    margin-top: 24px;
+    font-size: 11px;
+    color: var(--whisper);
+    letter-spacing: 0.2em;
+  }
+
+  .places-restantes strong {
+    color: var(--or);
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(212,175,55,0.1);
+    font-size: 11px;
+    color: var(--whisper);
+    letter-spacing: 0.15em;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .counter-block { padding: 20px 28px; flex-direction: column; gap: 16px; }
+    .counter-divider { width: 40px; height: 1px; }
+    .lettre-section { padding: 0 24px 60px; }
+    .avantages-section { padding: 60px 24px; }
+    .avantages-grid { grid-template-columns: 1fr; }
+    .regle-section { padding: 60px 24px; }
+    .regle-block { padding: 32px 24px; }
+    .prix-section { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://maisonminolya.com" class="nav-logo">
+    MAISON MINOLYA
+    <span>PERPIGNAN</span>
+  </a>
+  <a href="https://maisonminolya.com" class="nav-back">← Retour</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-number">25</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Édition limitée · 25 places</p>
+    <h1>
+      Le Cercle des
+      <em>Fondatrices</em>
+    </h1>
+    <p class="hero-intro">Vous n'arrivez pas dans une Maison déjà construite. Vous posez la première pierre. Ce privilège ne se répétera jamais.</p>
+
+    <div class="counter-block">
+      <div class="counter-number" id="placesRestantes">25</div>
+      <div class="counter-divider"></div>
+      <div class="counter-label">
+        <strong>Places disponibles</strong>
+        <span>sur 25 au total</span>
+      </div>
+    </div>
+
+    <div class="hero-price">
+      Investissement fondatrice · <span>990 €</span> · Paiement unique
+    </div>
+
+    <a href="https://maisonminolya.com/app?statut=fondatrice" class="btn-cta">
+      Rejoindre le Cercle ✦
+    </a>
+  </div>
+</section>
+
+<div class="ornement">
+  <div class="ornement-line"></div>
+  <div class="ornement-diamond"></div>
+  <div class="ornement-line right"></div>
+</div>
+
+<!-- LETTRE -->
+<section class="lettre-section">
+  <p class="lettre-eyebrow">Une lettre pour vous</p>
+  <h2 class="lettre-title">À celle qui arrive <em>au commencement</em>.</h2>
+
+  <div class="lettre-body">
+    <p>Il y a des moments dans la vie d'une Maison qui n'existent qu'une seule fois. Ce moment, c'est maintenant. Avant les premières tables dressées, avant que les habitués deviennent des habituées, avant que les murs s'imprègnent des conversations et des rires.</p>
+
+    <p>Nous cherchons 25 femmes qui croient en quelque chose avant même de l'avoir vécu. Des femmes qui comprennent qu'<em>être là au début, c'est être là pour toujours.</em></p>
+
+    <p>Le Cercle des Fondatrices n'est pas un abonnement. C'est un acte de confiance mutuelle. Vous nous faites confiance pour créer quelque chose de beau, nous vous offrons en retour une place permanente dans l'histoire de cette Maison — et des privilèges qui durent.</p>
+
+    <p>Votre prénom rejoindra les 24 autres sur cette page, pour toujours. Chaque femme qui découvrira Maison Minolya saura que vous étiez là avant elle.</p>
+
+    <div class="lettre-signature">— Maison Minolya</div>
+  </div>
+</section>
+
+<div class="ornement">
+  <div class="ornement-line"></div>
+  <div class="ornement-diamond"></div>
+  <div class="ornement-line right"></div>
+</div>
+
+<!-- AVANTAGES -->
+<section class="avantages-section">
+  <div class="avantages-inner">
+    <p class="section-label">Ce que vous obtenez</p>
+    <h2 class="section-heading">Les privilèges des <em>Fondatrices</em></h2>
+
+    <div class="avantages-grid">
+
+      <div class="avantage-item">
+        <p class="avantage-number">01</p>
+        <h3 class="avantage-title">12 événements offerts</h3>
+        <p class="avantage-desc">Un événement par mois pendant 12 mois — apéro, brunch ou dîner, au choix parmi les dates disponibles. Valeur estimée : plus de 400€.</p>
+      </div>
+
+      <div class="avantage-item">
+        <p class="avantage-number">02</p>
+        <h3 class="avantage-title">Accès prioritaire à vie</h3>
+        <p class="avantage-desc">Avant chaque nouvelle date, vous êtes les premières informées. Les places vous sont réservées 48h avant l'ouverture au public.</p>
+      </div>
+
+      <div class="avantage-item">
+        <p class="avantage-number">03</p>
+        <h3 class="avantage-title">Tarif préférentiel à vie</h3>
+        <p class="avantage-desc">Après vos 12 mois, vous bénéficiez d'une réduction permanente de 20% sur tous les événements et futurs formats de la Maison.</p>
+      </div>
+
+      <div class="avantage-item">
+        <p class="avantage-number">04</p>
+        <h3 class="avantage-title">Votre nom dans l'histoire</h3>
+        <p class="avantage-desc">Votre prénom est inscrit sur cette page pour toujours. Chaque visiteur saura que vous avez contribué à faire naître Maison Minolya.</p>
+      </div>
+
+      <div class="avantage-item">
+        <p class="avantage-number">05</p>
+        <h3 class="avantage-title">Avant-premières exclusives</h3>
+        <p class="avantage-desc">Retraites, nouveaux formats, nouvelles villes — vous découvrez et testez tout en avant-première, avant même l'annonce officielle.</p>
+      </div>
+
+      <div class="avantage-item">
+        <p class="avantage-number">06</p>
+        <h3 class="avantage-title">Un cercle d'exception</h3>
+        <p class="avantage-desc">Les 25 Fondatrices forment un groupe WhatsApp privé — un espace d'échanges, de soutien et de connexions entre femmes qui partagent la même vision.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="ornement">
+  <div class="ornement-line"></div>
+  <div class="ornement-diamond"></div>
+  <div class="ornement-line right"></div>
+</div>
+
+<!-- RÈGLE DES 3 -->
+<section class="regle-section">
+  <p class="section-label">Notre engagement envers vous</p>
+  <h2 class="section-heading" style="margin-bottom:40px;">L'exclusivité <em>préservée</em></h2>
+
+  <div class="regle-block">
+    <div class="regle-number">3</div>
+    <h3 class="regle-title">maximum par événement</h3>
+    <p class="regle-desc">Pour que chaque soirée reste un espace de vraies rencontres, jamais plus de 3 Fondatrices ne seront présentes au même événement. Votre place est précieuse — elle reste rare, même parmi vous.</p>
+  </div>
+</section>
+
+<div class="ornement">
+  <div class="ornement-line"></div>
+  <div class="ornement-diamond"></div>
+  <div class="ornement-line right"></div>
+</div>
+
+<!-- PRIX & CTA -->
+<section class="prix-section">
+  <div class="prix-inner">
+    <p class="section-label">Investissement</p>
+    <div class="prix-montant">990€</div>
+    <p class="prix-detail">Paiement unique · Sans abonnement · Sans surprise</p>
+
+    <ul class="prix-includes">
+      <li>12 événements inclus sur 12 mois (apéros, brunchs, dîners)</li>
+      <li>Maximum 3 Fondatrices par événement</li>
+      <li>Accès prioritaire aux dates à vie</li>
+      <li>Réduction permanente de 20% après 12 mois</li>
+      <li>Avant-premières sur tous les nouveaux formats</li>
+      <li>Groupe WhatsApp Fondatrices privé</li>
+      <li>Votre prénom inscrit sur cette page pour toujours</li>
+    </ul>
+
+    <a href="https://maisonminolya.com/app?statut=fondatrice" class="btn-cta-bottom">
+      Réserver ma place ✦
+    </a>
+
+    <p class="places-restantes">
+      Il reste <strong id="placesRestantes2">25</strong> places sur 25. Une fois le cercle complet, cette page disparaît.
+    </p>
+  </div>
+</section>
+
+<!-- LES FONDATRICES (noms à remplir au fur et à mesure) -->
+<section style="padding: 80px 48px; text-align:center;">
+  <p class="section-label">Le Cercle</p>
+  <h2 class="section-heading">Elles ont dit <em>oui</em> en premier.</h2>
+
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:700px;margin:0 auto;" id="fondatricesNoms">
+    <!-- Les noms s'ajouteront ici -->
+    <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.3em;color:rgba(212,175,55,0.3);padding:12px 24px;border:1px solid rgba(212,175,55,0.1);">En attente · Place 1</div>
+    <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.3em;color:rgba(212,175,55,0.3);padding:12px 24px;border:1px solid rgba(212,175,55,0.1);">En attente · Place 2</div>
+    <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.3em;color:rgba(212,175,55,0.3);padding:12px 24px;border:1px solid rgba(212,175,55,0.1);">En attente · Place 3</div>
+    <div style="font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:rgba(212,175,55,0.2);padding:12px 24px;">… et 22 places qui n'attendent que vous.</div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Maison Minolya · Perpignan · Occitanie
+</footer>
+
+</body>
+</html>
